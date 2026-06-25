@@ -1,5 +1,5 @@
 function App() {
-  return <>Plann-AI</>;
+  return <>Plann-AI</>
 }
 
-export default App;
+export default App
