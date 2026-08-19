@@ -7,7 +7,7 @@ export function Progress({ currentStep, totalSteps }: StepProgressProps) {
   const progress = (currentStep / totalSteps) * 100
 
   return (
-    <div className = "mb-4">
+    <div className="mb-4">
       <p className="text-muted-foreground mb-2 text-sm">
         Passo {currentStep} de {totalSteps}
       </p>
@@ -18,7 +18,7 @@ export function Progress({ currentStep, totalSteps }: StepProgressProps) {
           aria-valuemin={1}
           aria-valuemax={totalSteps}
           aria-label={`Step ${currentStep} of ${totalSteps}`}
-          className="bg-primary h-full rounded-full transition-all durantion-300"
+          className="bg-primary durantion-300 h-full rounded-full transition-all"
           style={{ width: `${progress}%` }}
         />
       </div>

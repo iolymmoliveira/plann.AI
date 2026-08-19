@@ -7,11 +7,11 @@ export function Hero() {
         <h1 className="text-foreground text-3xl font-semibold sm:text-4xl">
           Vamos planejar seu futuro
         </h1>
-        <img src={PiggyBank} alt="" aria-hidden="true" className="h-16 w-16 sm:-mt-2 sm:-ml-3" />
+        <img src={PiggyBank} alt="" aria-hidden="true" className="h-16 w-16 sm:-ml-3 sm:-mt-2" />
       </div>
-        <p className="text-muted-foreground text-sm">
-          Responda algumas questões para ter insights financeiros personalizados
-        </p>
+      <p className="text-muted-foreground text-sm">
+        Responda algumas questões para ter insights financeiros personalizados
+      </p>
     </div>
   )
 }
