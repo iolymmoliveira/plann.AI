@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 
 import { buildConversationPrompt } from '@/data/aiPrompt'
+import { useSimulationStorage } from '@/hooks/useSimulationStorage'
 import { getChatResponse } from '@/services/aiService'
-import { useSimulationStorage } from './useSimulationStorage'
 
 export interface ConversationMessage {
   id: string
@@ -39,11 +39,6 @@ export function useConversation(simulationId: string) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const lastQuestion = useRef<string | null>(null)
-
-  useEffect(() => {
-    setMessages(readConversations()[simulationId] ?? [])
-    setError(null)
-  }, [simulationId])
 
   const sendQuestion = useCallback(
     async (question: string) => {
