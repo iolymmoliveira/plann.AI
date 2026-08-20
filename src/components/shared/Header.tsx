@@ -11,7 +11,7 @@ export function Header() {
   return (
     <header className="border-(--border) border-b px-6 py-3">
       <nav className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2" onClick={() => void navigate('/')}>
           <div className="bg-primary flex h-9 w-9 items-center justify-center rounded-full">
             <Wallet size={20} className="text-primary-foreground" />
           </div>
