@@ -1,9 +1,9 @@
-import { ExternalLink, GoalIcon, Trash2 } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
-
-import { Button } from '@/components/shared/Button'
 import type { SimulationRecord } from '@/data/simulation'
 import { calcMonthlySavings } from '@/utils/simulation'
+import { GoalIcon } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { SimulationActions } from './SimulationActions'
+import { SimulationStat } from './SimulationStat'
 
 interface SimulationHistoryItemProps {
   simulation: SimulationRecord
@@ -22,7 +22,7 @@ export function SimulationHistoryItem({ simulation, onDelete }: SimulationHistor
   const monthlySavings = calcMonthlySavings(simulation)
 
   return (
-    <article className="bg-card grid gap-6 rounded-[22px] p-8 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.2)] sm:grid-cols-[auto_minmax(120px,1.2fr)_repeat(3,minmax(100px,1fr))_auto] sm:items-center sm:gap-6 ">
+    <article className="bg-card grid gap-6 rounded-[22px] p-8 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.2)] md:grid-cols-[auto_minmax(120px,1.2fr)_repeat(3,minmax(100px,1fr))_auto] md:items-center md:gap-6 ">
       <div className="bg-bg-icon text-primary flex h-10 w-10 items-center justify-center rounded-[10px]">
         <GoalIcon />
       </div>
@@ -34,66 +34,20 @@ export function SimulationHistoryItem({ simulation, onDelete }: SimulationHistor
         </p>
       </div>
 
-      <div>
-        <p className="text-muted-foreground text-xs font-semibold uppercase">Custo da meta</p>
-        <p className="mt-1 text-base font-semibold">{formatCurrency(simulation.goalAmount)}</p>
-      </div>
+      <SimulationStat label="Custo da meta" value={formatCurrency(simulation.goalAmount)} />
 
-      <div>
-        <p className="text-muted-foreground text-xs font-semibold uppercase">Prazo</p>
-        <p className="mt-1 text-base font-semibold">{simulation.goalDeadline} meses</p>
-      </div>
+      <SimulationStat label="Prazo" value={`${simulation.goalDeadline} meses`} />
 
-      <div>
-        <p className="text-muted-foreground text-xs font-semibold uppercase">Economia mensal</p>
-        <p className="mt-1 text-base font-semibold">
-          R$ {monthlySavings.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-        </p>
-      </div>
+      <SimulationStat
+        label="Economia mensal"
+        value={`R$ ${monthlySavings.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`}
+      />
 
-      {/* Ações - Mobile */}
-      <div className="border-border flex w-full items-center border-t pt-4 sm:hidden">
-        <Button
-          aria-label={`Excluir simulação ${simulation.goalName}`}
-          className="flex-1 justify-center text-red-500"
-          variant="ghost"
-          icon={Trash2}
-          onClick={() => onDelete(simulation.id)}
-        />
-
-        <div className="bg-border h-10 w-px" />
-
-        <Button
-          className="flex-1 justify-center text-xs"
-          variant="ghost"
-          icon={ExternalLink}
-          iconClassName="size-6"
-          onClick={() => void navigate(`/resultado/${simulation.id}`)}
-        >
-          Ver detalhes
-        </Button>
-      </div>
-
-      {/* Ações - Desktop */}
-      <div className="border-border hidden items-center justify-evenly gap-3 border-l pl-5 sm:flex">
-        <Button
-          aria-label={`Excluir simulação ${simulation.goalName}`}
-          className="px-2 py-2 text-red-500"
-          variant="ghost"
-          icon={Trash2}
-          iconClassName="size-6"
-          onClick={() => onDelete(simulation.id)}
-        />
-
-        <Button
-          className="gap-2.5 rounded-2xl px-4 py-2 text-xs"
-          variant="secondary"
-          icon={ExternalLink}
-          onClick={() => void navigate(`/resultado/${simulation.id}`)}
-        >
-          Ver detalhes
-        </Button>
-      </div>
+      <SimulationActions
+        goalName={simulation.goalName}
+        onDelete={() => onDelete(simulation.id)}
+        onViewDetails={() => void navigate(`/resultado/${simulation.id}`)}
+      />
     </article>
   )
 }
