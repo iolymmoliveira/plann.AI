@@ -1,7 +1,7 @@
-import { calcMonthlySavings } from "@/utils/simulation"
-import type { SimulationRecord } from "./simulation"
-import { parseCurrency } from "@/utils/currency"
-
+import type { ConversationMessage } from '@/hooks/useConversation'
+import { parseCurrency } from '@/utils/currency'
+import { calcMonthlySavings } from '@/utils/simulation'
+import type { SimulationRecord } from './simulation'
 
 const RESPONSE_SCHEMA = `{
   "feasibility": {
@@ -26,12 +26,10 @@ const RESPONSE_SCHEMA = `{
 }`
 
 export function buildAIPrompt(simulation: SimulationRecord) {
-  const { income, expenses, debts, goalName, goalAmount, goalDeadline } =
-    simulation
+  const { income, expenses, debts, goalName, goalAmount, goalDeadline } = simulation
 
   const monthlySavings = calcMonthlySavings(simulation)
-  const monthlySavingsNeeded =
-    parseCurrency(goalAmount) / parseInt(goalDeadline)
+  const monthlySavingsNeeded = parseCurrency(goalAmount) / parseInt(goalDeadline)
 
   return `Você é um educador financeiro especializado em finanças pessoais.
     Analise os dados abaixo e gere um diagnóstico financeiro personalizado com linguagem clara, didática e encorajadora,
@@ -63,4 +61,31 @@ export function buildAIPrompt(simulation: SimulationRecord) {
       - "viable": saldo após reserva para a meta é maior ou igual a 0
       - "needs_adjustment": saldo negativo de até 20% do valor da economia mensal necessária
       - "unfeasible": saldo negativo superior a 20% do valor da economia mensal necessária`
+}
+
+export function buildConversationPrompt(
+  simulation: SimulationRecord,
+  messages: ConversationMessage[],
+) {
+  const conversation = messages
+    .map(
+      (message) =>
+        `${message.role === 'user' ? 'Usuário' : 'Educador financeiro'}: ${message.content}`,
+    )
+    .join('\n')
+
+  return `Você é um educador financeiro claro, didático e encorajador. Responda em português do Brasil à última pergunta do usuário, usando exclusivamente o contexto da simulação abaixo. Não invente dados e não responda sobre outra pessoa ou simulação.
+
+Contexto da simulação:
+- Renda mensal bruta: ${simulation.income}
+- Custos fixos essenciais: ${simulation.expenses}
+- Dívidas e parcelas mensais: ${simulation.debts}
+- Meta: ${simulation.goalName}
+- Custo da meta: ${simulation.goalAmount}
+- Prazo desejado: ${simulation.goalDeadline} meses
+
+Histórico da conversa:
+${conversation}
+
+Responda somente com a mensagem ao usuário, sem prefixos, JSON ou markdown. Seja prático e relacione a resposta aos números da simulação.`
 }

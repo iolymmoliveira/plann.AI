@@ -46,7 +46,7 @@ export function SimulationResultsPage() {
           />
         </div>
         <div className="grid gap-6 lg:grid-cols-3">
-          <AIInsightsCard simulationId={data.id} />
+          <AIInsightsCard simulationId={data.id} goalName={data.goalName} />
           <div className="order-1 flex flex-col gap-6 lg:order-2">
             <Card
               icon={Wallet}
