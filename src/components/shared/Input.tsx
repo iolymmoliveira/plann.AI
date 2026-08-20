@@ -1,4 +1,5 @@
 import type { InputHTMLAttributes } from 'react'
+
 import { Divider } from './Divider'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {

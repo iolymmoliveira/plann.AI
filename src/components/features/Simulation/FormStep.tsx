@@ -1,8 +1,9 @@
+import { ArrowLeft, ArrowRight, type LucideIcon } from 'lucide-react'
+import { type SyntheticEvent, useState } from 'react'
+
 import { Button } from '@/components/shared/Button'
 import { Input, type InputProps } from '@/components/shared/Input'
 import { formatCurrencyMask } from '@/utils/currency'
-import { ArrowLeft, ArrowRight, type LucideIcon } from 'lucide-react'
-import { useState, type SyntheticEvent } from 'react'
 
 export interface FormStepProps {
   id: string

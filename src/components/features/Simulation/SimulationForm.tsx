@@ -1,7 +1,9 @@
-import { simulationFormSteps, type SimulationFormData } from '@/data/simulation'
-import { useSimulationStorage } from '@/hooks/useSimulationStorage'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+import { type SimulationFormData, simulationFormSteps } from '@/data/simulation'
+import { useSimulationStorage } from '@/hooks/useSimulationStorage'
+
 import { FormStep } from './FormStep'
 import { Progress } from './Progress'
 
@@ -17,7 +19,7 @@ export const SimulationForm = () => {
     const updatedFormData = { ...formData, [currentStep.id]: value }
     setFormData(updatedFormData)
     if (currentStepIndex + 1 > totalSteps - 1) {
-      const id =saveFormData(updatedFormData)
+      const id = saveFormData(updatedFormData)
       void navigate(`/resultado/${id}`)
       return
     }

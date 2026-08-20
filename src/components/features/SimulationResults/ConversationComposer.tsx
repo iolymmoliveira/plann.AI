@@ -29,7 +29,7 @@ export function ConversationComposer({ isLoading, onSubmit }: ConversationCompos
     >
       <input
         aria-label="Pergunte ao educador financeiro"
-        className="text-muted-foreground placeholder:text-muted-foreground min-w-0 flex-1 bg-transparent py-4.5 px-5 text-xs outline-none rounded-[20px] shadow-[4px_4px_18px_0px_rgba(0,0,0,0.25)] h-15"
+        className="text-muted-foreground placeholder:text-muted-foreground py-4.5 h-15 min-w-0 flex-1 rounded-[20px] bg-transparent px-5 text-xs shadow-[4px_4px_18px_0px_rgba(0,0,0,0.25)] outline-none"
         disabled={isLoading}
         placeholder="Faça uma pergunta sobre sua simulação..."
         value={question}
@@ -37,7 +37,7 @@ export function ConversationComposer({ isLoading, onSubmit }: ConversationCompos
       />
       <Button
         aria-label="Enviar pergunta"
-        className="h-15 w-15 rounded-2xl shrink-0"
+        className="h-15 w-15 shrink-0 rounded-2xl"
         disabled={isLoading || !question.trim()}
         icon={Send}
         variant="primary"

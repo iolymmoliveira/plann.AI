@@ -26,7 +26,7 @@ export default defineConfig([
       tseslint.configs.recommended,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
-      prettierConfig.configs.recommended,
+      prettierConfig,
     ],
   },
 ])

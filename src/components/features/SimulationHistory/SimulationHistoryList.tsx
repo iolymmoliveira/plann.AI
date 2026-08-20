@@ -1,4 +1,5 @@
 import type { SimulationRecord } from '@/data/simulation'
+
 import { SimulationHistoryItem } from './SimulationHistoryItem'
 
 interface SimulationHistoryListProps {

@@ -1,7 +1,9 @@
-import type { SimulationRecord } from '@/data/simulation'
-import { calcMonthlySavings } from '@/utils/simulation'
 import { GoalIcon } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+
+import type { SimulationRecord } from '@/data/simulation'
+import { calcMonthlySavings } from '@/utils/simulation'
+
 import { SimulationActions } from './SimulationActions'
 import { SimulationStat } from './SimulationStat'
 

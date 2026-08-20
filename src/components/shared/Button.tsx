@@ -17,9 +17,19 @@ const variantClasses = {
   ghost: 'rounded-lg text-foreground',
 }
 
-export function Button({ variant, icon: Icon, iconClassName, children, className, ...props }: ButtonProps) {
+export function Button({
+  variant,
+  icon: Icon,
+  iconClassName,
+  children,
+  className,
+  ...props
+}: ButtonProps) {
   return (
-    <button {...props} className={twMerge([baseClasses, variantClasses[variant], className].join(' '))}>
+    <button
+      {...props}
+      className={twMerge([baseClasses, variantClasses[variant], className].join(' '))}
+    >
       {Icon && <Icon className={twMerge('size-5', iconClassName)} />}
       {children}
     </button>

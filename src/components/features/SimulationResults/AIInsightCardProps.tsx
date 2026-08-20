@@ -1,8 +1,11 @@
-import { useConversation } from '@/hooks/useConversation'
-import { useInsight } from '@/hooks/useInsight'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 import { useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+
+import { useConversation } from '@/hooks/useConversation'
+import { useInsight } from '@/hooks/useInsight'
+
 import { Content } from '../Insights/Content'
 import { Error } from '../Insights/Error'
 import { ConversationComposer } from './ConversationComposer'
